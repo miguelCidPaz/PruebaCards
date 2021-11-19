@@ -9,11 +9,18 @@ body, html{
 }
 
 .body-card{
+    width: 45%;
     margin: auto;
+    height: 500px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 5px grey;
+}
+
+.body-head-card{
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     background-color: rgb(67, 73, 155);
-    width: 45%;
+    width: 100%;
     margin-top: 50px;
     padding-top: 10px;
 }
@@ -62,4 +69,49 @@ body, html{
 .text-card{
     color: white;
     text-align: center;
+}
+
+.body-date-card{
+    height: 100px;
+    text-align: justify;
+}
+
+.date{
+    width: 80%;
+    margin: auto;
+    padding: 15px;
+    display: flex;
+}
+
+.ornament{
+    border-radius: 100%;
+    margin-right: 10px;
+    margin-top: 4px;
+    padding: 2px;
+    width: 10px;
+    height: 10px;
+    background-color: black;
+}
+
+.date p{
+    font-size: 20px;
+}
+
+.devices .ornament{
+    background-color: burlywood;
+}
+
+.location .ornament{
+    background-color: orange;
+}
+
+.profile .ornament{
+    background-color: greenyellow;
+}
+
+.total-amount{
+    margin-top: 20px;
+    text-align: center;
+    font-style: italic;
+    font-size: 30px;
 }
