@@ -115,3 +115,19 @@ body, html{
     font-style: italic;
     font-size: 30px;
 }
+
+#root{
+    background-color: red;
+    height: 100%;
+}
+
+.column{
+    display: flex;
+    flex-direction: column;
+}
+
+.row{
+    display: flex;
+    flex-direction: row;
+}
+

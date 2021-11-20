@@ -18,7 +18,8 @@ App.defaultProps = {
         name: 'Linda Williams',
         number: '1-555-245-2013',
         link: 'linda.w@webbs.com',
-        userName: 'Lindw'
+        userName: 'Lindw',
+        language: 'English(United States)'
     },
 
     dates: {

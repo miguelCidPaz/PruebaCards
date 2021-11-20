@@ -1,11 +1,39 @@
 import React, { Component } from 'react';
 
+
 class FileUser extends Component {
     constructor(props) {
         super(props);
-        this.state = { ...this.props.personalData, ...this.props.extraData }
+        this.state = { ...this.props.personalData }
     }
+
     render() {
+        const information = {
+            BasicInformation: {
+                title: 'Basic Information',
+                element: {
+                    FullName: ['Full Name', this.state.name],
+                    EmailAddress: ['Email Address', this.state.link],
+                    StudentID: ['Student ID', false],
+                    Password: ['Password', false]
+                }
+            },
+            AdditionalInformation: {
+                title: 'Additional Information',
+                element: {
+                    gender: ['gender', false]
+                }
+            },
+            SystemSettings: {
+                title: 'System Settings',
+                element: {
+                    language: ['Languages', 'English (United States)'],
+                    privacy: ['Privacy Settings', 'Only administrators and other instructors can view my profile information'],
+                    global: ['Global Notification Settings', ['Stream notifications', 'Email notifications', 'Push notifications']]
+                }
+            }
+        }
+
         return (
             <div className="body-file-user">
 
@@ -16,61 +44,55 @@ class FileUser extends Component {
                     <p className="name-presentation">{this.state.name}</p>
                     <p className="username-presentation">{this.state.userName}</p>
                 </div>
-
-
-                <p className="title-section-file-user">Basic information</p>
-                <section className="section-file-user">
-                    <div className="section-file">
-                        <p className="subtitle-section">Full Name</p>
-                        <p className="file-result">{this.state.name}</p>
+                <div className="row">
+                    <div className="column">
+                        <Camp content={information.BasicInformation} />
+                        <Camp content={information.AdditionalInformation} />
+                        <Camp content={information.SystemSettings} />
                     </div>
-                    <div className="section-file">
-                        <p className="subtitle-section">Email Address</p>
-                        <p className="file-result">{this.state.name}</p>
-                    </div>
-                    <div className="section-file">
-                        <p className="subtitle-section">Student ID</p>
-                        <p className="file-result">{this.props.link.userID}</p>
-                    </div>
-                    <div className="section-file">
-                        <p className="subtitle-section">Password</p>
-                        <p className="file-result">Nombre de turno</p>
-                    </div>
-                </section>
-
-                <p className="title-section-file-user">Additional information</p>
-                <section className="section-file-user">
-                    <div className="section-file">
-                        <p className="subtitle-section">Gender</p>
-                        <p className="file-result">Monigote azul</p>
-                    </div>
-                </section>
-
-                <p className="title-section-file-user">System Settings</p>
-                <section className="section-file-user">
-                    <div className="section-file">
-                        <p className="subtitle-section">Language</p>
-                        <p className="file-result">Lenguaje de turno texto especialmente largo</p>
-                    </div>
-                    <div className="section-file">
-                        <p className="subtitle-section">Privacy Settings</p>
-                        <p className="file-result">Privacidad de turno texto especialmente largo</p>
-                    </div>
-                    <div className="section-file">
-                        <p className="subtitle-section">Global Notification Settings</p>
-                        <p className="file-result">Notificaciones de turno especialmente largas</p>
-                    </div>
-                </section>
+                </div>
             </div>
         )
     }
 }
 
-FileUser.defaultProps = {
-    links: {
-        studentID: "Add student ID",
-        password: "Change password",
-        notification: "Link de turno"
+class Camp extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { ...this.props.content }
+    }
+    render() {
+        let arr = [];
+        for (let [a, b] of Object.entries(this.state.element)) {
+            arr.push(<Slot content={b} />)
+        }
+        return (
+            <>
+                <p className="title-section-file-user">{this.state.title}</p>
+                <section className="section-file-user">
+                    {arr}
+                </section>
+            </>
+        )
+    }
+}
+
+class Slot extends Component {
+    render() {
+        let aux = ''
+        if (this.props.content[1] === false) {
+            aux = 'link de turno'
+        } else if (this.props.content[1].length === 3) {
+            aux = 'Esto es un array xulo'
+        } else {
+            aux = this.props.content[1];
+        }
+        return (
+            <div className="section-file">
+                <p className="subtitle-section">{this.props.content[0]}</p>
+                <p className="file-result">{aux}</p>
+            </div>
+        )
     }
 }
 
