@@ -235,3 +235,20 @@ body, html{
     width: 8px;
     box-shadow: 0 0 5px grey inset, 0 0 5px grey;
 }
+
+.extra-content-file-user{
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap:5px;
+}
+
+.icon{
+    width: 20px;
+    height: 20px;
+}
+
+.icon img{
+    width: 100%;
+}

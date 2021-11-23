@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Editable from './Editable'
 import '../CSS/style.css'
 
 class FileUser extends Component {
@@ -12,24 +13,24 @@ class FileUser extends Component {
             BasicInformation: {
                 title: 'Basic Information',
                 element: {
-                    FullName: ['Full Name', this.state.name],
-                    EmailAddress: ['Email Address', this.state.link],
-                    StudentID: ['Student ID', false],
-                    Password: ['Password', false]
+                    FullName: ['Full Name', this.state.name, true],
+                    EmailAddress: ['Email Address', this.state.link, false],
+                    StudentID: ['Student ID', false, false],
+                    Password: ['Password', false, false]
                 }
             },
             AdditionalInformation: {
                 title: 'Additional Information',
                 element: {
-                    gender: ['gender', false]
+                    gender: ['gender', false, false]
                 }
             },
             SystemSettings: {
                 title: 'System Settings',
                 element: {
-                    language: ['Languages', 'English (United States)'],
-                    privacy: ['Privacy Settings', 'Only administrators and other instructors can view my profile information'],
-                    global: ['Global Notification Settings', ['Stream notifications', 'Email notifications', 'Push notifications']]
+                    language: ['Languages', 'English (United States)', false],
+                    privacy: ['Privacy Settings', 'Only administrators and other instructors can view my profile information', false],
+                    global: ['Global Notification Settings', ['Stream notifications', 'Email notifications', 'Push notifications'], false]
                 }
             }
         }
@@ -46,12 +47,12 @@ class FileUser extends Component {
                 </div>
                 <div className="row">
                     <div className="column">
-                        <Camp content={information.BasicInformation} />
-                        <Camp content={information.AdditionalInformation} />
+                        <Camp setPersonalData={this.setPersonalData} content={information.BasicInformation} />
+                        <Camp setPersonalData={this.setPersonalData} content={information.AdditionalInformation} />
 
                     </div>
                     <div className="separator"></div>
-                    <Camp content={information.SystemSettings} />
+                    <Camp setPersonalData={this.setPersonalData} content={information.SystemSettings} />
                 </div>
             </div>
         )
@@ -66,7 +67,7 @@ class Camp extends Component {
     render() {
         let arr = [];
         for (let [a, b] of Object.entries(this.state.element)) {
-            arr.push(<Slot key={a} content={b} />)
+            arr.push(<Slot setPersonalData={this.setPersonalData} key={a} content={b} />)
         }
         return (
             <>
@@ -82,6 +83,31 @@ class Camp extends Component {
 }
 
 class Slot extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            cond: false,
+            editableValue: this.props.content[1]
+        }
+        this.myRef = React.createRef();
+        this.myEditable = this.myEditable.bind(this)
+        this.newUser = this.newUser.bind(this)
+    }
+
+    myEditable(value) {
+        this.setState({
+            cond: value
+        });
+    }
+
+    newUser() {
+        this.setState({
+            editableValue: this.myRef.current.value
+        })
+
+        this.setPersonalData(this.state.editableValue)
+    }
+
     render() {
         let aux = []
         if (this.props.content[1] === false) {
@@ -102,6 +128,12 @@ class Slot extends Component {
                 </div>
             </div>)
         } else {
+
+            if (this.props.content[2] === true) {
+                aux = <div className='extra-content-file-user'>
+                    {this.state.cond ? <p contentEditable ref={this.myRef} onChange={this.newUser} >{this.state.editableValue}</p> : <p>{this.state.editableValue}</p>}<Editable props={this.state.cond} myEditable={this.myEditable} /></div>
+            }
+
             return (
                 <div className="section-file">
                     <p className="subtitle-section">{this.props.content[0]}</p>
