@@ -22,19 +22,26 @@ class App extends Component {
                 amount: 2314
             }
         }
-        this.setPresentation = this.setPresentation.bind(this)
+        this.setName = this.setName.bind(this)
     }
 
-    setPresentation(value) {
+    setName(value) {
+        let newPresentation = {}
+        for (let [a] of Object.entries(this.state.presentation)) {
+            if (a == 'name') {
+                a = value
+            }
+            newPresentation += a
+        }
         this.setState({
-            presentation: value
+            presentation: newPresentation
         })
     }
 
     render() {
         return (
             //<Card presentation={this.props.presentation} dates={this.props.dates} />
-            <FileUser setPersonalData={this.setPresentation} personalData={this.state.presentation} extraData={this.state.dates} />
+            <FileUser setName={this.setName} personalData={this.state.presentation} extraData={this.state.dates} />
         )
     }
 }

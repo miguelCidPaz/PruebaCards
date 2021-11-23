@@ -47,12 +47,12 @@ class FileUser extends Component {
                 </div>
                 <div className="row">
                     <div className="column">
-                        <Camp setPersonalData={this.setPersonalData} content={information.BasicInformation} />
-                        <Camp setPersonalData={this.setPersonalData} content={information.AdditionalInformation} />
+                        <Camp setName={this.props.setName} content={information.BasicInformation} />
+                        <Camp setName={this.props.setName} content={information.AdditionalInformation} />
 
                     </div>
                     <div className="separator"></div>
-                    <Camp setPersonalData={this.setPersonalData} content={information.SystemSettings} />
+                    <Camp setName={this.props.setName} content={information.SystemSettings} />
                 </div>
             </div>
         )
@@ -67,7 +67,7 @@ class Camp extends Component {
     render() {
         let arr = [];
         for (let [a, b] of Object.entries(this.state.element)) {
-            arr.push(<Slot setPersonalData={this.setPersonalData} key={a} content={b} />)
+            arr.push(<Slot setName={this.props.setName} key={a} content={b} />)
         }
         return (
             <>
@@ -101,11 +101,13 @@ class Slot extends Component {
     }
 
     newUser() {
+        const value = this.myRef.current.value
         this.setState({
-            editableValue: this.myRef.current.value
+            editableValue: value
         })
 
-        this.setPersonalData(this.state.editableValue)
+        console.log(value)
+        this.props.setName(value)
     }
 
     render() {
