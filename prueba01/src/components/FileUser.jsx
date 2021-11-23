@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import '../CSS/style.css'
 
 class FileUser extends Component {
     constructor(props) {
@@ -48,8 +48,10 @@ class FileUser extends Component {
                     <div className="column">
                         <Camp content={information.BasicInformation} />
                         <Camp content={information.AdditionalInformation} />
-                        <Camp content={information.SystemSettings} />
+
                     </div>
+                    <div className="separator"></div>
+                    <Camp content={information.SystemSettings} />
                 </div>
             </div>
         )
@@ -64,14 +66,16 @@ class Camp extends Component {
     render() {
         let arr = [];
         for (let [a, b] of Object.entries(this.state.element)) {
-            arr.push(<Slot content={b} />)
+            arr.push(<Slot key={a} content={b} />)
         }
         return (
             <>
-                <p className="title-section-file-user">{this.state.title}</p>
-                <section className="section-file-user">
-                    {arr}
-                </section>
+                <div className="column">
+                    <p className="title-section-file-user">{this.state.title}</p>
+                    <section className="section-file-user">
+                        {arr}
+                    </section>
+                </div>
             </>
         )
     }
@@ -79,20 +83,33 @@ class Camp extends Component {
 
 class Slot extends Component {
     render() {
-        let aux = ''
+        let aux = []
         if (this.props.content[1] === false) {
-            aux = 'link de turno'
+            aux = <p className="file-result file-link">Change your {this.props.content[0]}</p>
         } else if (this.props.content[1].length === 3) {
-            aux = 'Esto es un array xulo'
+            this.props.content[1].map((element, index) => {
+                return aux.push(<p key={index} className="file-settings">{element}</p>)
+            })
         } else {
             aux = this.props.content[1];
         }
-        return (
-            <div className="section-file">
+
+        if (aux.length === 3) {
+            return (<div className="section-file section-settings">
                 <p className="subtitle-section">{this.props.content[0]}</p>
-                <p className="file-result">{aux}</p>
-            </div>
-        )
+                <div className="column">
+                    {aux}
+                </div>
+            </div>)
+        } else {
+            return (
+                <div className="section-file">
+                    <p className="subtitle-section">{this.props.content[0]}</p>
+                    {aux}
+                </div>
+            )
+        }
+
     }
 }
 
