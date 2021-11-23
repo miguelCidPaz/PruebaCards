@@ -117,7 +117,11 @@ body, html{
 }
 
 #root{
-    background-color: rgb(204, 195, 195);
+    background-color: rgb(224, 218, 218);
+    background-image: url('https://pbs.twimg.com/media/D6uc2kBX4AAv3xV.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
     height: 100%;
 }
 
@@ -188,7 +192,7 @@ body, html{
 
 .section-file-user{
     width: 80%;
-    background-color: white;
+    background-color: rgb(243, 237, 237);
     margin: 10px;
 }
 
@@ -199,7 +203,7 @@ body, html{
     padding-right: 10px;
     justify-content: space-between;
     align-items: center;
-    border:1px solid black;
+    box-shadow: 0 0 2px grey;
 }
 
 .section-settings{
