@@ -66,7 +66,7 @@ class Camp extends Component {
     render() {
         let arr = [];
         for (let [a, b] of Object.entries(this.state.element)) {
-            arr.push(<Slot content={b} />)
+            arr.push(<Slot key={a} content={b} />)
         }
         return (
             <>
@@ -87,8 +87,8 @@ class Slot extends Component {
         if (this.props.content[1] === false) {
             aux = <p className="file-result file-link">Change your {this.props.content[0]}</p>
         } else if (this.props.content[1].length === 3) {
-            this.props.content[1].map((element) => {
-                aux.push(<p className="file-settings">{element}</p>)
+            this.props.content[1].map((element, index) => {
+                return aux.push(<p key={index} className="file-settings">{element}</p>)
             })
         } else {
             aux = this.props.content[1];
