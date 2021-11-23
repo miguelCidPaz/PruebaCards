@@ -222,6 +222,11 @@ body, html{
     text-decoration: underline;
 }
 
+.subtitle-section{
+    font-weight: bolder;
+    font-size: 20px;
+}
+
 .separator{
     position: relative;
     top:30px;
