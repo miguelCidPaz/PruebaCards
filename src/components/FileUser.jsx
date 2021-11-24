@@ -15,7 +15,7 @@ class FileUser extends Component {
                 element: {
                     name: ['Full Name', this.state.name, true],
                     link: ['Email Address', this.state.link, true],
-                    StudentID: ['Student ID', false, false],
+                    userName: ['Student ID', this.state.userName, true],
                     Password: ['Password', false, false]
                 }
             },
@@ -42,8 +42,8 @@ class FileUser extends Component {
                     <div className="picture-frame-file">
                         <img src={this.state.photo} alt="" />
                     </div>
-                    <p className="name-presentation">{this.state.name}</p>
-                    <p className="username-presentation">{this.state.userName}</p>
+                    <p className="name-presentation">{this.props.personalData.name}</p>
+                    <p className="username-presentation">{this.props.personalData.userName}</p>
                 </div>
                 <div className="row">
                     <div className="column">

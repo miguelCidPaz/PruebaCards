@@ -35,6 +35,9 @@ class App extends Component {
             case 'link':
                 newPresentation.link = value
                 break;
+            case 'userName':
+                newPresentation.userName = value
+                break;
             default:
                 return this.state
         }
