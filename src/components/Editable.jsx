@@ -33,7 +33,7 @@ class Editable extends Component {
     render() {
         return (
             <div className='extra-content-file-user'>
-                {this.state.cond ? <input type="text" onChange={this.inEdit} ref={this.myRef} /> : <p>{this.state.value}</p>}
+                {this.state.cond ? <input type="text" onChange={this.inEdit} ref={this.myRef} value={this.state.value} /> : <p>{this.state.value}</p>}
                 <button className='icon' onClick={this.isEdit} >
                     <img src={editable} alt="#" />
                 </button>

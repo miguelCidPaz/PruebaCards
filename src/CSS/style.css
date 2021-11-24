@@ -211,15 +211,18 @@ body, html{
 }
 
 .file-settings{
-    color: rgb(0, 60, 255);
-    text-decoration: underline;
     text-align: end;
     padding: 5% 2%;
 }
 
-.file-link{
+.file-link, .file-settings{
     color: rgb(0, 60, 255);
     text-decoration: underline;
+    cursor: pointer;
+}
+
+.file-link:hover, .file-settings:hover{
+    text-shadow: 0 0 5px rgb(0, 60, 255);
 }
 
 .subtitle-section{
@@ -247,6 +250,22 @@ body, html{
 .icon{
     width: 20px;
     height: 20px;
+    border: 0;
+    box-shadow: 0 0 3px grey;
+    cursor: pointer;
+}
+
+.icon:hover{
+    box-shadow: 0 0 8px grey;
+}
+
+input{
+    width: 50%;
+    height: 20px;
+    font-size: 20px;
+    outline: none;
+    border: none;
+    box-shadow: 0 0 3px grey;
 }
 
 .icon img{

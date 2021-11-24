@@ -14,8 +14,8 @@ class FileUser extends Component {
                 title: 'Basic Information',
                 element: {
                     name: ['Full Name', this.state.name, true],
-                    link: ['Email Address', this.state.link, true],
-                    userName: ['Student ID', this.state.userName, true],
+                    link: ['Email Address', this.state.link, false],
+                    userName: ['Student ID', false, false],
                     Password: ['Password', false, false]
                 }
             },
