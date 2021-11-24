@@ -13,8 +13,8 @@ class FileUser extends Component {
             BasicInformation: {
                 title: 'Basic Information',
                 element: {
-                    FullName: ['Full Name', this.state.name, true],
-                    EmailAddress: ['Email Address', this.state.link, false],
+                    name: ['Full Name', this.state.name, true],
+                    link: ['Email Address', this.state.link, true],
                     StudentID: ['Student ID', false, false],
                     Password: ['Password', false, false]
                 }
@@ -28,12 +28,12 @@ class FileUser extends Component {
             SystemSettings: {
                 title: 'System Settings',
                 element: {
-                    language: ['Languages', 'English (United States)', false],
+                    language: ['Languages', this.state.language, false],
                     privacy: ['Privacy Settings', 'Only administrators and other instructors can view my profile information', false],
                     global: ['Global Notification Settings', ['Stream notifications', 'Email notifications', 'Push notifications'], false]
                 }
             }
-        }
+        };
 
         return (
             <div className="body-file-user">
@@ -47,12 +47,12 @@ class FileUser extends Component {
                 </div>
                 <div className="row">
                     <div className="column">
-                        <Camp setName={this.props.setName} content={information.BasicInformation} />
-                        <Camp setName={this.props.setName} content={information.AdditionalInformation} />
+                        <Camp setValue={this.props.setValue} content={information.BasicInformation} />
+                        <Camp setValue={this.props.setValue} content={information.AdditionalInformation} />
 
                     </div>
                     <div className="separator"></div>
-                    <Camp setName={this.props.setName} content={information.SystemSettings} />
+                    <Camp setValue={this.props.setValue} content={information.SystemSettings} />
                 </div>
             </div>
         )
@@ -62,12 +62,13 @@ class FileUser extends Component {
 class Camp extends Component {
     constructor(props) {
         super(props);
-        this.state = { ...this.props.content }
+        this.state = { ...this.props.content, }
     }
+
     render() {
         let arr = [];
         for (let [a, b] of Object.entries(this.state.element)) {
-            arr.push(<Slot setName={this.props.setName} key={a} content={b} />)
+            arr.push(<Slot setValue={this.props.setValue} key={a} identity={a} content={b} />)
         }
         return (
             <>
@@ -87,27 +88,9 @@ class Slot extends Component {
         super(props);
         this.state = {
             cond: false,
-            editableValue: this.props.content[1]
+            editableValue: this.props.content[1],
+            identity: this.props.identity
         }
-        this.myRef = React.createRef();
-        this.myEditable = this.myEditable.bind(this)
-        this.newUser = this.newUser.bind(this)
-    }
-
-    myEditable(value) {
-        this.setState({
-            cond: value
-        });
-    }
-
-    newUser() {
-        const value = this.myRef.current.value
-        this.setState({
-            editableValue: value
-        })
-
-        console.log(value)
-        this.props.setName(value)
     }
 
     render() {
@@ -132,8 +115,7 @@ class Slot extends Component {
         } else {
 
             if (this.props.content[2] === true) {
-                aux = <div className='extra-content-file-user'>
-                    {this.state.cond ? <p contentEditable ref={this.myRef} onChange={this.newUser} >{this.state.editableValue}</p> : <p>{this.state.editableValue}</p>}<Editable props={this.state.cond} myEditable={this.myEditable} /></div>
+                aux = <Editable props={this.state} identity={this.state.identity} setValue={this.props.setValue} />
             }
 
             return (

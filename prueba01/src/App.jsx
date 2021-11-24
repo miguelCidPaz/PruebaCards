@@ -22,26 +22,32 @@ class App extends Component {
                 amount: 2314
             }
         }
-        this.setName = this.setName.bind(this)
+        this.setValue = this.setValue.bind(this)
     }
 
-    setName(value) {
-        let newPresentation = {}
-        for (let [a] of Object.entries(this.state.presentation)) {
-            if (a == 'name') {
-                a = value
-            }
-            newPresentation += a
+    setValue(value, identity) {
+        const newPresentation = this.state.presentation
+        //const newDates = this.state.dates
+        switch (identity) {
+            case 'name':
+                newPresentation.name = value
+                break;
+            case 'link':
+                newPresentation.link = value
+                break;
+            default:
+                return this.state
         }
-        this.setState({
+
+        this.setState(() => ({
             presentation: newPresentation
-        })
+        }))
     }
 
     render() {
         return (
             //<Card presentation={this.props.presentation} dates={this.props.dates} />
-            <FileUser setName={this.setName} personalData={this.state.presentation} extraData={this.state.dates} />
+            <FileUser setValue={this.setValue} personalData={this.state.presentation} extraData={this.state.dates} />
         )
     }
 }
