@@ -25,23 +25,7 @@ class App extends Component {
         this.setValue = this.setValue.bind(this)
     }
 
-    setValue(value, identity) {
-        const newPresentation = this.state.presentation
-        //const newDates = this.state.dates
-        switch (identity) {
-            case 'name':
-                newPresentation.name = value
-                break;
-            case 'link':
-                newPresentation.link = value
-                break;
-            case 'userName':
-                newPresentation.userName = value
-                break;
-            default:
-                return this.state
-        }
-
+    setValue(newPresentation) {
         this.setState(() => ({
             presentation: newPresentation
         }))

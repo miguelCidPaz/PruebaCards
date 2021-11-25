@@ -27,8 +27,7 @@ class FileUser extends Component {
         }
 
         this.setState({ newPresentation })
-
-        this.props.setValue(value, identity);
+        this.props.setValue(newPresentation);
     }
 
     render() {
