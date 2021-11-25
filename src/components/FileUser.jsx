@@ -6,6 +6,29 @@ class FileUser extends Component {
     constructor(props) {
         super(props);
         this.state = { ...this.props.personalData }
+        this.setData = this.setData.bind(this)
+    }
+
+    setData(value, identity) {
+        const newPresentation = this.state
+
+        switch (identity) {
+            case 'name':
+                newPresentation.name = value
+                break;
+            case 'link':
+                newPresentation.link = value
+                break;
+            case 'userName':
+                newPresentation.userName = value
+                break;
+            default:
+                return this.state
+        }
+
+        this.setState({ newPresentation })
+
+        this.props.setValue(value, identity);
     }
 
     render() {
@@ -14,8 +37,8 @@ class FileUser extends Component {
                 title: 'Basic Information',
                 element: {
                     name: ['Full Name', this.state.name, true],
-                    link: ['Email Address', this.state.link, false],
-                    userName: ['Student ID', false, false],
+                    link: ['Email Address', this.state.link, true],
+                    userName: ['Student ID', this.state.userName, true],
                     Password: ['Password', false, false]
                 }
             },
@@ -47,12 +70,12 @@ class FileUser extends Component {
                 </div>
                 <div className="row">
                     <div className="column">
-                        <Camp setValue={this.props.setValue} content={information.BasicInformation} />
-                        <Camp setValue={this.props.setValue} content={information.AdditionalInformation} />
+                        <Camp setValue={this.setData} content={information.BasicInformation} />
+                        <Camp setValue={this.setData} content={information.AdditionalInformation} />
 
                     </div>
                     <div className="separator"></div>
-                    <Camp setValue={this.props.setValue} content={information.SystemSettings} />
+                    <Camp setValue={this.setData} content={information.SystemSettings} />
                 </div>
             </div>
         )
