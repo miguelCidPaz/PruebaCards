@@ -7,6 +7,11 @@ class FileUser extends Component {
         super(props);
         this.state = { ...this.props.personalData }
         this.setData = this.setData.bind(this)
+        this.changeView = this.changeView.bind(this)
+    }
+
+    changeView() {
+        this.props.changeView(!this.props.focus)
     }
 
     setData(value, identity) {
@@ -58,10 +63,10 @@ class FileUser extends Component {
         };
 
         return (
-            <div className="body-file-user">
+            <>
 
                 <div className="presentation-picture-user">
-                    <div className="picture-frame-file">
+                    <div className="picture-frame-file" onClick={this.changeView}>
                         <img src={this.state.photo} alt="" />
                     </div>
                     <p className="name-presentation">{this.props.personalData.name}</p>
@@ -76,7 +81,7 @@ class FileUser extends Component {
                     <div className="separator"></div>
                     <Camp setValue={this.setData} content={information.SystemSettings} />
                 </div>
-            </div>
+            </>
         )
     }
 }
