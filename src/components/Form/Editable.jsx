@@ -1,4 +1,4 @@
-import editable from '../res/edit.png'
+import editable from '../../res/edit.png'
 import React, { Component } from 'react'
 
 class Editable extends Component {

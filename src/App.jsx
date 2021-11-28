@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Card from './components/Card'
-import FileUser from './components/FileUser';
+import Card from './components/Card/Card'
+import FileUser from './components/Form/FileUser';
 
 class App extends Component {
     constructor(props) {
