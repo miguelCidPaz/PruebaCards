@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Card from './components/Card/Card'
 import FileUser from './components/Form/FileUser';
+import { ThemeContext } from './context';
 
 class App extends Component {
     constructor(props) {
@@ -39,7 +40,10 @@ class App extends Component {
         }))
     }
 
+    static contextType = ThemeContext;
+
     render() {
+        console.log(this.context)
         return (
             <div className="body-file-user">
                 {
