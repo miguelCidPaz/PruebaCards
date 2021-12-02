@@ -7,6 +7,12 @@ class Camp extends Component {
         this.state = { ...this.props.content, }
     }
 
+    componentDidUpdate(prevProps) {
+        if (prevProps !== this.props) {
+            this.setState({ ...this.props.content })
+        }
+    }
+
     render() {
         let arr = [];
         for (let [a, b] of Object.entries(this.state.element)) {

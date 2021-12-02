@@ -11,6 +11,12 @@ class Slot extends Component {
         }
     }
 
+    componentDidUpdate(prevProps) {
+        if (prevProps !== this.props) {
+            this.setState({ cond: this.state.cond, editableValue: this.props.content[1], identity: this.props.identity })
+        }
+    }
+
     render() {
         let aux = []
         if (this.props.content[1] === false) {
