@@ -27,11 +27,14 @@ class App extends Component {
         this.setValue = this.setValue.bind(this)
         this.changeView = this.changeView.bind(this)
     }
+    static contextType = ThemeContext;
 
     setValue(newPresentation) {
         this.setState(() => ({
             presentation: newPresentation
         }))
+        this.context.presentation = { newPresentation }
+        console.log(this.context.presentation)
     }
 
     changeView(newValue) {
@@ -40,7 +43,7 @@ class App extends Component {
         }))
     }
 
-    static contextType = ThemeContext;
+
 
     render() {
         console.log(this.context)
